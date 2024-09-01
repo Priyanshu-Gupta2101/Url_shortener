@@ -1,3 +1,8 @@
+## Deployment
+
+Current deployed at `http://url-shortener-weld-seven.vercel.app/docs`
+So do check it out
+
 # URL Shortener API
 
 This is a simple URL shortener API built with FastAPI and PostgreSQL. It allows users to shorten long URLs and redirect to the original URLs using the shortened versions.
@@ -38,8 +43,20 @@ This is a simple URL shortener API built with FastAPI and PostgreSQL. It allows 
    ```
    DATABASE_URL=postgresql://user:password@localhost/dbname
    ```
+5. Run these script in your posgresql cli/local editor 
 
-5. Run the application:
+   ```
+   CREATE TABLE urls (
+    id SERIAL PRIMARY KEY,
+    original_url TEXT NOT NULL,
+    short_code VARCHAR(6) UNIQUE NOT NULL
+   );
+
+   CREATE INDEX idx_original_url ON urls(original_url);
+   CREATE INDEX idx_short_code ON urls(short_code);
+   ``` 
+
+6. Run the application:
    ```
    python main.py
    ```
